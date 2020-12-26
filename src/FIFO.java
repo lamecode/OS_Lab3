@@ -5,6 +5,11 @@ public class FIFO {
     private int priority;
     private Process last;
 
+    FIFO() {
+        priority = 0;
+        last = null;
+    }
+
     public void push(Process p) {
         if (last == null) {
             priority = p.getPriority();
@@ -31,7 +36,7 @@ public class FIFO {
         String fifo = "";
         Process temp = last;
         while (temp != null && temp.getNext() != null) {
-            fifo += temp.toString() + " ";
+            fifo += temp.toString();
             temp = temp.getNext();
         }
         fifo += temp.toString() + " ";

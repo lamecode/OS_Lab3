@@ -11,9 +11,9 @@ public class Main {
         allQueues = new ArrayList<>();
         for (int i = 0; i < 34; i++) {
             allProcesses.add(new Process(i,
-                    Process.MIN_PRIORITY +
-                            new Random().nextInt(Process.MAX_PRIORITY), Process.MIN_PRIORITY +
-                    new Random().nextInt(Process.MAX_PRIORITY)));
+                    Process.MAX_PRIORITY +
+                            new Random().nextInt(Process.MIN_PRIORITY),
+                    new Random().nextInt(100)));
         }
         for (int i = 0; i < allProcesses.size(); i++) {
             if (allQueues.size() == 0) {
@@ -28,12 +28,17 @@ public class Main {
                     }
                     if (j == allQueues.size() - 1) {
                         allQueues.add(new FIFO());
-                        allQueues.get(j).push(allProcesses.get(i));
+                        allQueues.get(j+1).push(allProcesses.get(i));
+                        sortFIFOs(allQueues);
                         break;
                     }
                 }
 
             }
+        }
+        for (int i = 0; i < allQueues.size(); i++) {
+            System.out.println("Processes with priority " + allQueues.get(i).getPriority());
+            System.out.println(allQueues.get(i).toString());
         }
 
     }

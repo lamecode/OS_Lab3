@@ -58,6 +58,9 @@ public class Process {
     }
 
     public String toString() {
-        return String.valueOf(id);
+        return "Process id: " + id + "\n" +
+                "Process priority: " + priority + "\n" +
+                "Process execution time: " + executionTime + "\n" +
+                "Process waiting time: " + waitingTime + "\n";
     }
 }
