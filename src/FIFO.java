@@ -16,8 +16,20 @@ public class FIFO {
             last = p;
         } else {
             p.setNext(last);
+            p.setWaitingTime(calculateWaitingTime());
             last = p;
         }
+    }
+
+    public int calculateWaitingTime() {
+        int waitingTime = 0;
+        Process temp = last;
+        while (temp != null && temp.getNext() != null) {
+            waitingTime += temp.getExecutionTime();
+            temp = temp.getNext();
+        }
+        waitingTime += temp.getExecutionTime();
+        return waitingTime;
     }
 
     public void pop() {
