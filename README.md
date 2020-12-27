@@ -15,7 +15,7 @@ a method of scheduling in which the active process is performed until he gives c
 
 ## Graphs
 
-![average_time_by_priority](average_time_by_priority.png "average time by priority")
+![average_time_by_process_number](average_time_by_process_number.png "average time by process number")
 
 ![average_time_by_priority](average_time_by_priority.png "average time by priority")
 
