@@ -4,6 +4,7 @@ public class Process {
     private int priority;
     private int executionTime;
     private int waitingTime;
+    private long delayTime;
     private Process next;
     public static final int MIN_PRIORITY = 32;
     public static final int MAX_PRIORITY = 1;
@@ -14,6 +15,7 @@ public class Process {
         this.priority = priority;
         this.executionTime = executionTime;
         waitingTime = 0;
+        delayTime = 0;
         next = null;
     }
 
@@ -60,7 +62,14 @@ public class Process {
     public String toString() {
         return "Process id: " + id + "\n" +
                 "Process priority: " + priority + "\n" +
-                "Process execution time: " + executionTime + "\n" +
-                "Process waiting time: " + waitingTime + "\n";
+                "Process execution time: " + executionTime + "\n";
+    }
+
+    public void setDelayTime(long time) {
+        delayTime = time;
+    }
+
+    public long getDelayTime() {
+        return delayTime;
     }
 }

@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class FIFO {
 
     private int priority;
@@ -21,6 +19,10 @@ public class FIFO {
         }
     }
 
+    public Process getLast() {
+        return last;
+    }
+
     public int calculateWaitingTime() {
         int waitingTime = 0;
         Process temp = last;
@@ -30,6 +32,17 @@ public class FIFO {
         }
         waitingTime += temp.getExecutionTime();
         return waitingTime;
+    }
+
+    public int getSize() {
+        int size = 0;
+        Process temp = last;
+        while (temp != null && temp.getNext() != null) {
+            size += 1;
+            temp = temp.getNext();
+        }
+        size += 1;
+        return size;
     }
 
     public void pop() {
@@ -44,14 +57,30 @@ public class FIFO {
         return priority;
     }
 
-    public String toString() {
+    public String convertToString(int time, long delay) {
         String fifo = "";
         Process temp = last;
+        long start = 0;
+        long end = 0;
         while (temp != null && temp.getNext() != null) {
             fifo += temp.toString();
+            fifo += "Process waiting time: " + (temp.getWaitingTime() + time) + "\n";
+            temp.setDelayTime(delay);
+            start = System.currentTimeMillis();
             temp = temp.getNext();
+            end = System.currentTimeMillis();
+            delay += (end - start) / 1000F;
+            fifo += "Delay time: " + (delay) + "\n";
+            if (temp != null && temp.getNext() != null) {
+                start = System.currentTimeMillis();
+            }
         }
-        fifo += temp.toString() + " ";
+        end = System.currentTimeMillis();
+        delay += (end - start) / 1000F;
+        fifo += temp.toString();
+        fifo += "Process waiting time: " + (temp.getWaitingTime() + time) + "\n";
+        fifo += "Delay time: " + (delay) + "\n";
+        temp.setDelayTime(delay);
         return fifo;
     }
 }
